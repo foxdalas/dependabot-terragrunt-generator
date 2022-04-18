@@ -1,0 +1,14 @@
+version: 2
+updates:
+  {{range $val := .}}
+  - package-ecosystem: "terraform"
+    directory: "{{$val}}"
+    schedule:
+      interval: "daily"
+    commit-message:
+      prefix: "chore(deps):"
+    labels:
+      - "dependencies"
+    pull-request-branch-name:
+      separator: "-"
+  {{end}}
