@@ -4,5 +4,6 @@ MAINTAINER Maxim Pogozhiy <foxdalas@gmail.com>
 ARG TARGETARCH
 
 COPY dependabot-terragrunt-generator /bin/dependabot-terragrunt-generator
+COPY templates /bin/
 
 ENTRYPOINT ["/bin/dependabot-terragrunt-generator"]
