@@ -29,6 +29,8 @@ dockers:
     build_flag_templates:
       - "--platform=linux/amd64"
     use: buildx
+    extra_files:
+    - templates/config.tmpl
   - id: dependabot-terragrunt-generator-docker-arm64
     goos: linux
     goarch: arm64
@@ -39,6 +41,8 @@ dockers:
     build_flag_templates:
       - "--platform=linux/arm64"
     use: buildx
+    extra_files:
+    - templates/config.tmpl
 docker_manifests:
   - name_template: foxdalas/dependabot-terragrunt-generator:v{{ .Version }}
     image_templates:
