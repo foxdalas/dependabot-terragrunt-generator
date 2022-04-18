@@ -3,6 +3,7 @@ MAINTAINER Maxim Pogozhiy <foxdalas@gmail.com>
 
 ARG TARGETARCH
 
-COPY dependabot-terragrunt-generator /bin/dependabot-terragrunt-generator
+COPY templates/config.tmpl /app/templates/config.tmpl
+COPY dependabot-terragrunt-generator /app/dependabot-terragrunt-generator
 
-ENTRYPOINT ["/bin/dependabot-terragrunt-generator"]
+ENTRYPOINT ["/app/dependabot-terragrunt-generator"]
