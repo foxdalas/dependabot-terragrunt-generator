@@ -2,7 +2,7 @@ package main
 
 import (
 	"flag"
-	"fmt"
+	log "github.com/sirupsen/logrus"
 	"html/template"
 	"os"
 	"path/filepath"
@@ -23,9 +23,12 @@ func main() {
 
 	dirs, err := findTerragrunt(terragruntRepoPath)
 	if err != nil {
-		fmt.Println(err)
+		log.Fatal(err)
 	}
-	createDependabotConfig(dirs, dependabotFile)
+	err = createDependabotConfig(dirs, dependabotFile)
+	if err != nil {
+		log.Fatal(err)
+	}
 }
 
 func findTerragrunt(dir string) ([]string, error) {
@@ -44,9 +47,9 @@ func findTerragrunt(dir string) ([]string, error) {
 			projects = append(projects, filepath.Dir(path))
 		}
 
-		file, err := os.Open(path)
+		file, e := os.Open(path)
 		if err != nil {
-			return err
+			return e
 		}
 
 		defer func() {
@@ -65,6 +68,9 @@ func createDependabotConfig(dirs []string, file string) error {
 	}
 
 	t, err := template.ParseFiles("templates/config.tmpl")
+	if err != nil {
+		log.Error(err)
+	}
 	err = t.Execute(f, dirs)
 	if err != nil {
 		return err
